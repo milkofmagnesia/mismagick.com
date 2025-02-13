@@ -1,0 +1,213 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    background: url(images/magick-ezgif.com-speed.gif) no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: none; /* Hide default cursor */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  #background-gif {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0.5; /* Slight transparency */
+    z-index: -1; /* Behind the content */
+  }
+  
+  #background-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  #background-gif.hidden {
+    display: none;
+  }
+  
+  header .logo {
+    height: 150px; /* Adjust height as needed */
+    margin-bottom: 20px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin: 0;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    color: #ff00ff;
+  }
+  
+  .section {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+  }
+  
+  .overlay {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay to blend with aesthetic */
+    color: white;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Glitch effect applied only to the logo */
+  header .glitch {
+    position: relative;
+  }
+  
+  header .glitch::before,
+  header .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    clip: rect(0, 900px, 0, 0);
+  }
+  
+  header .glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 red, 2px 0 green, -2px 2px blue;
+    animation: glitch1 3s infinite linear alternate-reverse;
+  }
+  
+  header .glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 purple, 2px 0 orange, -2px 2px yellow;
+    animation: glitch2 4s infinite linear alternate-reverse;
+  }
+  
+  @keyframes glitch1 {
+    0% {
+      clip: rect(0, 900px, 0, 0);
+    }
+    20% {
+      clip: rect(20px, 900px, 40px, 0);
+    }
+    40% {
+      clip: rect(40px, 900px, 60px, 0);
+    }
+    60% {
+      clip: rect(60px, 900px, 80px, 0);
+    }
+    80% {
+      clip: rect(80px, 900px, 100px, 0);
+    }
+    100% {
+      clip: rect(0, 900px, 100%, 0);
+    }
+  }
+  
+  @keyframes glitch2 {
+    0% {
+      clip: rect(100px, 900px, 0, 0);
+    }
+    20% {
+      clip: rect(80px, 900px, 20px, 0);
+    }
+    40% {
+      clip: rect(60px, 900px, 40px, 0);
+    }
+    60% {
+      clip: rect(40px, 900px, 60px, 0);
+    }
+    80% {
+      clip: rect(20px, 900px, 80px, 0);
+    }
+    100% {
+      clip: rect(100px, 900px, 100%, 0);
+    }
+  }
+  
+  /* Centering the Spotify embed */
+  .spotify-embed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Centering the Instagram embed and adding curved edges */
+  .instagram-embed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+  }
+  
+  /* White noise overlay and hover effects */
+  #white-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: url(images/static.gif); /* White noise image or GIF */
+    mix-blend-mode: screen;
+    opacity: 0.1;
+    z-index: 999;
+    transition: opacity 0.20s ease;
+  }
+  
+  a:hover ~ #white-noise,
+  button:hover ~ #white-noise {
+    opacity: 0.10;
+  }
+  

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mismagick</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script async src="//www.instagram.com/embed.js"></script>
+  </head>
+  <body>
+    <header>
+      <div id="background-gif" class="hidden">
+        <img
+          src="images/mismagickoverlay1-ezgif.com-video-to-gif-converter.gif"
+          alt="Background GIF"
+        />
+      </div>
+      <div class="glitch" data-text="Mismagick">
+        <img src="images/logo.png" alt="Mismagick Logo" class="logo" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">🏠</a></li>
+          <li><a href="music.html">🎸</a></li>
+          <li><a href="gallery.html">📷</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="section">
+        <div class="overlay">
+          <h1>Welcome to Mismagick</h1>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Mismagick. All rights reserved.</p>
+    </footer>
+
+    <div id="white-noise"></div>
+
+    <script>
+      // Toggle GIF visibility every 20 seconds
+      setInterval(function () {
+        var gif = document.getElementById("background-gif");
+        if (gif.classList.contains("hidden")) {
+          gif.classList.remove("hidden");
+        } else {
+          gif.classList.add("hidden");
+        }
+      }, 20000);
+
+      // Create cursor trail
+      document.addEventListener("DOMContentLoaded", function () {
+        const cursorTrail = [];
+        const cursorImage = "images/cursor.png"; // Custom cursor image URL
+        const trailLength = 5;
+        const delay = 5; // Number of frames delay
+
+        for (let i = 0; i < trailLength; i++) {
+          const img = document.createElement("img");
+          img.src = cursorImage;
+          img.style.position = "absolute";
+          img.style.width = "30px"; // Adjust size as needed
+          img.style.height = "30px"; // Adjust size as needed
+          img.style.pointerEvents = "none"; // Prevents cursor image from interfering with clicks
+          document.body.appendChild(img);
+          cursorTrail.push(img);
+        }
+
+        let mouseX = 0,
+          mouseY = 0;
+        document.addEventListener("mousemove", function (event) {
+          mouseX = event.clientX;
+          mouseY = event.clientY;
+        });
+
+        const positions = Array(trailLength * delay).fill({
+          x: mouseX,
+          y: mouseY,
+        });
+
+        function animateCursorTrail() {
+          positions.push({ x: mouseX, y: mouseY });
+          positions.shift();
+
+          cursorTrail.forEach((img, index) => {
+            const posIndex = positions.length - (index + 1) * delay;
+            const position = positions[posIndex] || { x: mouseX, y: mouseY };
+            img.style.left = position.x + "px";
+            img.style.top = position.y + "px";
+            img.style.transform = `translate(-50%, -50%) scale(${
+              1 - index * 0.1
+            })`;
+          });
+
+          requestAnimationFrame(animateCursorTrail);
+        }
+
+        animateCursorTrail();
+      });
+
+      // Flying image script
+      document.addEventListener("DOMContentLoaded", function () {
+        const flyingImages = [];
+        const numberOfImages = 3; // Number of flying images
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        function getRandomColor() {
+          const letters = "0123456789ABCDEF";
+          let color = "#";
+          for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        }
+
+        function createFlyingImage() {
+          const img = document.createElement("img");
+          img.src = "images/fly.png"; // URL of your flying image
+          img.style.position = "absolute";
+          img.style.width = "200px"; // Adjust size as needed
+          img.style.height = "200px"; // Adjust size as needed
+          img.style.pointerEvents = "auto"; // Allows clicking
+          img.style.transition = "all 8s linear"; // Adjust speed as needed
+          img.style.zIndex = 1000; // Ensures images are above other elements
+          img.style.filter = `hue-rotate(${Math.random() * 360}deg)`; // Random color
+          img.addEventListener("click", function () {
+            window.location.href = "secret.html";
+          });
+          document.body.appendChild(img);
+          flyingImages.push(img);
+        }
+
+        function moveFlyingImage(img) {
+          const x = Math.random() * screenWidth;
+          const y = Math.random() * screenHeight;
+          img.style.left = `${x}px`;
+          img.style.top = `${y}px`;
+        }
+
+        for (let i = 0; i < numberOfImages; i++) {
+          createFlyingImage();
+        }
+
+        setInterval(function () {
+          flyingImages.forEach(moveFlyingImage);
+        }, 1000); // Adjust the interval as needed
+      });
+    </script>
+  </body>
+</html>
